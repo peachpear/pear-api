@@ -33,6 +33,7 @@ class LRedisCache extends Cache
 	 * @var  Redis the redis  instance
 	 */
 	private $_cache = null;
+
 	/**
 	 * @var string host
 	 */
@@ -68,10 +69,8 @@ class LRedisCache extends Cache
 	 */
 	public function getRedis()
 	{
-		if ($this->_cache === null)
-		{
-			if (!extension_loaded('redis'))
-			{
+		if ($this->_cache === null) {
+			if (!extension_loaded('redis')) {
 				Yii::Error("LRedisCache requires PHP redis extension to be loaded", self::LOG_PREFIX . __FUNCTION__);
 				throw new LException(LError::INTERNAL_ERROR);
 			}
@@ -79,8 +78,7 @@ class LRedisCache extends Cache
             $this->_cache = new Redis();
             $this->_cache->connect($this->host, $this->port);
 
-            if ($this->password)
-            {
+            if ($this->password) {
                 $this->_cache->auth($this->password);
             }
 			if ($this->database) {
@@ -146,15 +144,17 @@ class LRedisCache extends Cache
 	 */
 	protected function getValues($keys)
 	{
-		if ($this->_ping)
-		{
+		if ($this->_ping) {
 			$this->checkConnection();
 		}
 		$response = $this->_cache->mGet($keys);
 		$result=array();
 		$i=0;
 		foreach($keys as $key)
-			$result[$key]=$response[$i++];
+        {
+            $result[$key] = $response[$i++];
+        }
+
 		return $result;
 	}
 
@@ -169,30 +169,24 @@ class LRedisCache extends Cache
 	 */
 	protected function setValue($key, $value, $expire)
 	{
-		if ($this->_ping)
-		{
+		if ($this->_ping) {
 			$this->checkConnection();
 		}
 
-        //兼容PHP7
-        if ($expire <= 0)
-        {
+        // 兼容PHP7
+        if ($expire <= 0) {
             $result = $this->_cache->set($key, $value);
-        }
-        else
-        {
+        } else {
             $result = $this->_cache->set($key, $value, $expire);
         }
 
-		if ($result !== true)
-		{
+		if ($result !== true) {
 			Yii::Error("save key[" . $key . "] failed", "common.components.LRedisCache.setValue");
 
 			return false;
 		}
 
 		return true;
-
 	}
 
 	/**
@@ -206,15 +200,14 @@ class LRedisCache extends Cache
 	 */
 	protected function addValue($key, $value, $expire)
 	{
-		if ($expire <= 0)
-		{
+		if ($expire <= 0) {
 			$expire = 0;
 		}
 
-		if ($this->_ping)
-		{
+		if ($this->_ping) {
 			$this->checkConnection();
 		}
+
 		return $this->_cache->set($key, $value, array('nx', 'ex' => $expire));
 	}
 
@@ -226,10 +219,10 @@ class LRedisCache extends Cache
 	 */
 	protected function deleteValue($key)
 	{
-		if ($this->_ping)
-		{
+		if ($this->_ping) {
 			$this->checkConnection();
 		}
+
 		return $this->_cache->delete($key) == 1;
 	}
 
@@ -241,10 +234,10 @@ class LRedisCache extends Cache
 	 */
 	protected function flushValues()
 	{
-		if ($this->_ping)
-		{
+		if ($this->_ping) {
 			$this->checkConnection();
 		}
+
 		return $this->_cache->flushdb();
 	}
 

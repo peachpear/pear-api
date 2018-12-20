@@ -3,40 +3,37 @@ defined("ENV") || define("ENV", "prod");
 $baseConfig = include('base.php');
 
 $commonConfig = array(
-    'components' => array(
-        'cache' => array(
+    'components' => [
+        'cache' => [
             'host' => '',
             'port' => 6379,
-            "password" => "",
             'keyPrefix' => '',
-        ),
-        'db'  => array(
+        ],
+        'demoDB'  => [
             'dsn' => '',
             'username' => '',
             'password' => '',
-        ),
-        'kafkaProducer' => array(
-            "metadata" => array(
-                "brokerList" => "",
-            ),
+        ],
+        'kafkaProducer' => [
+            "metadata" => [
+                "brokerList" => "192.168.40.122:9200",
+            ],
             "requireAck" => 0,
-        ),
-        'queue' => array(
-            'credentials' => array(
+        ],
+        'queue' => [
+            'credentials' => [
                 'host' => '',
-                'port' => '',
+                'port' => '5672',
                 'login' => '',
                 'password' => ''
-            )
-        ),
-    ),
-    'params' => array(
-    ),
+            ]
+        ],
+    ],
+    'params' => [],
     "configCenter" => [
         "filePath" => "/config/prod/",
         "fileExt" => "json",
     ]
-
 );
 
 return [$baseConfig, $commonConfig];

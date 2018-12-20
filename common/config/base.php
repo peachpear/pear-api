@@ -1,37 +1,37 @@
 <?php
 defined("APP_NAME") || define("APP_NAME", "demo");
+
 return array(
     'aliases' => [
         '@common' => realpath(__DIR__."/../"),
     ],
     'bootstrap' => ['log'],
-	'components' => array(
-		'cache' => array(
+	'components' => [
+		'cache' => [
 			'class' => 'common\components\LRedisCache',
 			'hashKey' => false,
-		),
+		],
 		// db
-        'db' => array(
+        'db' => [
             'class' => '\yii\db\Connection',
             'charset' => 'utf8mb4',
-            'enableQueryCache'  =>  false,
-        ),
-		'curl'	=>	array(
+            'enableQueryCache' => false,
+        ],
+		'curl'=> [
 			'class' => 'common\components\LComponentCurl',
-		),
-        'kafkaProducer' =>  array(
+		],
+        'kafkaProducer' => [
             "class" =>  'common\components\LKafkaProducerQueue'
-        ),
-        'queue' =>  array(
+        ],
+        'queue' => [
             "class" =>  'common\components\LRabbitQueue'
-        ),
-        'log' => array(
+        ],
+        'log' => [
             'targets' => [
-                'kafka' =>
-                    [
-                        'class' => 'common\lib\LKafkaTarget',
-                    ],
+                'kafka' => [
+                    'class' => 'common\lib\LKafkaTarget',
+                ],
             ],
-        )
-	)
+        ]
+	]
 );

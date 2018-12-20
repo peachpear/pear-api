@@ -7,7 +7,6 @@ use yii\base\Component;
 /**
  * Class LRabbitQueue
  * @package common\components
- * User: iBaiYang
  */
 class LRabbitQueue extends Component
 {
@@ -20,7 +19,9 @@ class LRabbitQueue extends Component
 
     }
 
-
+    /**
+     * 初始化连接
+     */
     public function initConnection()
     {
         if (!$this->connection || !is_resource($this->connection)) {
@@ -31,7 +32,11 @@ class LRabbitQueue extends Component
         }
     }
 
-    public function connect($tryNum=3)
+    /**
+     * @param int $tryNum
+     * @throws \Exception
+     */
+    public function connect($tryNum = 3)
     {
         try {
             $this->connection->connect();
@@ -45,15 +50,26 @@ class LRabbitQueue extends Component
                 throw $e;
             }
         }
-
     }
-    
+
+    /**
+     * 获取连接
+     * @return mixed
+     */
     public function getConnection()
     {
         $this->initConnection();
+
         return $this->connection;
     }
 
+    /**
+     * 向队列推送数据
+     * @param $message
+     * @param $exchange
+     * @param $routing
+     * @return bool
+     */
     public function produce($message, $exchange, $routing)
     {
         $message = json_encode($message);
@@ -73,6 +89,13 @@ class LRabbitQueue extends Component
         return true;
     }
 
+    /**
+     * 向队列批量推送数据
+     * @param $messageList
+     * @param $exchange
+     * @param $routing
+     * @return bool
+     */
     public function batchProduce($messageList, $exchange, $routing)
     {
         $channel = new \AMQPChannel($this->getConnection());
@@ -95,16 +118,15 @@ class LRabbitQueue extends Component
     }
 
     /**
+     * 通用延迟消费进队方法,消息持久化
      * @param $message
      * @param $exchange
      * @param $routing
      * @param $ttl    消息生存时间(1000 = 1s)
      * @return bool
-     * 通用延迟消费进队方法,消息持久化
      */
     public function produceTtl($message, $exchange, $routing, $ttl)
     {
-
         $message = json_encode($message);
 
         $channel = new \AMQPChannel($this->getConnection());
