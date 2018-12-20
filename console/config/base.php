@@ -8,8 +8,8 @@ return array(
         '@console' => realpath(__DIR__."/../"),
     ],
     "components" =>  [
-        'errorHandler'  =>  array(
+        'errorHandler' => [
             'class' => 'console\components\LConsoleErrorHandler',
-        ),
+        ],
     ],
 );

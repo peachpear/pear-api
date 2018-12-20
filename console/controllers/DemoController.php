@@ -7,7 +7,6 @@ use yii\console\Controller;
 /**
  * Class DemoController
  * @package console\controllers
- * User: iBaiYang
  */
 class DemoController extends Controller
 {

@@ -4,13 +4,11 @@ namespace console\components;
 use common\components\LException;
 use common\components\LRabbitQueue;
 use Yii;
-use yii\console\Application;
 use yii\console\ErrorHandler;
 
 /**
  * Class LConsoleErrorHandler
  * @package console\components
- * User: iBaiYang
  */
 class LConsoleErrorHandler extends ErrorHandler
 {
@@ -68,18 +66,15 @@ class LConsoleErrorHandler extends ErrorHandler
 
         foreach ($trace as $i => $t)
         {
-            if (!isset($t['file']))
-            {
+            if (!isset($t['file'])) {
                 $trace[$i]['file'] = 'unknown';
             }
 
-            if (!isset($t['line']))
-            {
+            if (!isset($t['line'])) {
                 $trace[$i]['line'] = 0;
             }
 
-            if (!isset($t['function']))
-            {
+            if (!isset($t['function'])) {
                 $trace[$i]['function'] = 'unknown';
             }
 
@@ -96,7 +91,6 @@ class LConsoleErrorHandler extends ErrorHandler
 //            'traces' => $trace,
         );
     }
-
 
     public function renderException($exception)
     {

@@ -1,9 +1,9 @@
 <?php
 namespace common\components;
 
+use common\misc\LUtil;
 use Yii;
 use yii\web\Request;
-use common\misc\LUtil;
 
 /**
  * Request请求类
@@ -18,7 +18,7 @@ class LHttpRequest extends Request
     const TYPE_ARRAY = 3;
 
     /**
-     * 确认用户IP地址
+     * 获取用户IP地址
      * @return string
      */
 	public function getUserHostAddress()

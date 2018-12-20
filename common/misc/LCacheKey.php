@@ -2,10 +2,8 @@
 namespace common\misc;
 
 /**
- * Created by PhpStorm.
- * User: iBaiYang
- * Date: 2018/4/8
- * Time: 下午10:11
+ * Class LCacheKey
+ * @package common\misc
  */
 class LCacheKey
 {
@@ -13,25 +11,24 @@ class LCacheKey
      * redis常量
      */
     const REDIS_PARAM = array(
-        'class_teacher' => 'class:teacher:',//排课部分锁老师的常量
-        'class_student' => 'class:student:',//排课部分锁学生的常量
+        'class_boss' => 'class:boss:',  // 会议部分锁boss的常量
+        'class_staff' => 'class:staff:',  // 会议部分锁staff的常量
     );
 
     /**
      * redis锁定时间
      */
     const REDIS_LOCK_TIME = array(
-        'class_teacher' => 60,//排课部分锁老师的锁定时间
-        'class_student' => 60,///排课部分锁学生的锁定时间
+        'class_boss' => 60,  // 会议部分锁boss的锁定时间
+        'class_staff' => 60,  // 会议部分锁staff的锁定时间
     );
 
     /**
      * @param string $type
      * @return int|mixed
-     * @created by wt
      * 获取对应的锁定时间--默认锁定60s
      */
-    public static function getRedisLockTime($type = 'class_teacher')
+    public static function getRedisLockTime($type = 'class_boss')
     {
         if (isset(self::REDIS_LOCK_TIME[$type])) {
             return self::REDIS_LOCK_TIME[$type];
@@ -43,10 +40,9 @@ class LCacheKey
     /**
      * @param string $type
      * @return bool|mixed
-     * @created by wt
      * 获取rediskey
      */
-    public static function getRedisKey($type = 'class_teacher')
+    public static function getRedisKey($type = 'class_boss')
     {
         if ( isset(self::REDIS_PARAM[$type]) ) {
             return self::REDIS_PARAM[$type];

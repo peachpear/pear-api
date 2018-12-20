@@ -6,14 +6,21 @@ use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * Created by PhpStorm.
- * User: iBaiYang
+ * ActiveRecord基类
+ * Class LActiveRecord
+ * @package common\lib
  */
 class LActiveRecord extends ActiveRecord implements JsonSerializable
 {
-
     const LOG_PREFIX = 'common.lib.LActiveRecord.';
 
+    /**
+     * 保存数据
+     * @param bool $runValidation
+     * @param null $attributeNames
+     * @param int $tryNum
+     * @return bool
+     */
 	public function save($runValidation = true, $attributeNames = null, $tryNum = 3)
 	{
 		if (! $this instanceof LActiveRecord || $tryNum < 1) {

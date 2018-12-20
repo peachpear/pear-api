@@ -1,5 +1,4 @@
 <?php
-
 defined('YII_DEBUG') or define("YII_DEBUG", false);
 
 $initConfig = [
@@ -12,12 +11,12 @@ $initConfig = [
         ],
     ],
     "params"    =>  [
-        'elkIndexName'  =>  array(
+        'elkIndexName' => [
             "error" =>  "error_demo_logs_pre",
             "warning" =>  "demo_logs_pre",
             "info" =>  "demo_logs_pre",
             "trace" =>  "demo_logs_pre",
-        ),
+        ],
     ]
 ];
 list($commonBaseConfig, $commonConfig) = include(__DIR__ . '/../../common/config/pre.php');

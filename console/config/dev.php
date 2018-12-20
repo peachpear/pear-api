@@ -1,5 +1,4 @@
 <?php
-
 defined('YII_DEBUG') or define("YII_DEBUG", true);
 
 $initConfig = [
@@ -12,11 +11,11 @@ $initConfig = [
         ],
     ],
     "params"    =>  [
-        'elkIndexName'  =>  array(
+        'elkIndexName' => [
             "error" =>  "error_demo_logs_dev",
             "warning" =>  "demo_logs_dev",
             "info" =>  "demo_logs_dev",
-        ),
+        ],
     ]
 ];
 

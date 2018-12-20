@@ -3,20 +3,16 @@ namespace common\lib;
 
 use common\components\LKafkaProducerQueue;
 use common\misc\LUtil;
-use common\service\LLogRequestBlackListService;
 use Yii;
 use yii\log\Logger;
 use yii\log\Target;
 
 /**
- * Created by PhpStorm.
- * User: iBaiYang
- * Date: 2018/3/30
- * Time: 上午11:35
+ * Class LKafkaTarget
+ * @package common\lib
  */
 class LKafkaTarget extends Target
 {
-
     /** @var  LKafkaProducerQueue */
     public $kafkaProducer;
 
@@ -32,7 +28,6 @@ class LKafkaTarget extends Target
      */
     public function export()
     {
-        // TODO: Implement export() method.
         $text = array_map([$this, 'formatMessage'], $this->messages);
         $this->kafkaProducer->send($text);
     }
@@ -55,12 +50,12 @@ class LKafkaTarget extends Target
         global $logId;
         global $step;
         $data = [
-            "log_id"    =>  $logId,
+            "log_id"    => $logId,
             "indexname" => $indexname,
-            "time"  =>  date('Y-m-d H:i:s', $timestamp),
-            "category"=>$category,
-            "level"=>$level,
-            "step"  =>  $step++,
+            "time"      => date('Y-m-d H:i:s', $timestamp),
+            "category"  => $category,
+            "level"     => $level,
+            "step"      => $step++,
         ];
         if (!LUtil::isCli()) {
             $data["ip_address"] = Yii::$app->request->getUserHostAddress();
@@ -82,7 +77,8 @@ class LKafkaTarget extends Target
 
         $traces = [];
         if (isset($message[4])) {
-            foreach ($message[4] as $trace) {
+            foreach ($message[4] as $trace)
+            {
                 $traces[] = "in {$trace['file']}:{$trace['line']}";
             }
         }
@@ -95,5 +91,4 @@ class LKafkaTarget extends Target
             "value" =>  json_encode($data),
         ];
     }
-
 }
