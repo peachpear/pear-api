@@ -3,7 +3,7 @@
     "description": "pear for api framework",
     "keywords": ["pear", "api"],
     "type": "project",
-    "license": "Mozilla Public License Version 2.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "baiyang",
