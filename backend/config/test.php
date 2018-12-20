@@ -3,7 +3,7 @@ defined('YII_DEBUG') or define("YII_DEBUG", false);
 
 $initConfig = [
     "components"  =>  [
-        'log' => array(
+        'log' => [
             'targets' => [
                 'kafka'  =>
                     [
@@ -11,17 +11,20 @@ $initConfig = [
                         'logVars'=>[],
                     ],
             ]
-        ),
+        ],
     ],
     "params"    =>  [
-        'elkIndexName'  =>  array(
+        'elkIndexName'  =>  [
             "error" =>  "error_demo_logs_test",
             "warning" =>  "demo_logs_test",
             "info" =>  "demo_logs_test",
             "trace" =>  "demo_logs_test",
-        )
+        ]
     ]
 ];
+
 list($commonBaseConfig, $commonEnvConfig)= include(__DIR__ . '/../../common/config/test.php');
+
 $baseConfig = include('base.php');
+
 return [$commonBaseConfig, $commonEnvConfig, $baseConfig, $initConfig];

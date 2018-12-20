@@ -1,41 +1,59 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iBaiYang
- */
-
 namespace common\misc;
 
+/**
+ * 错误类工具
+ * Class LError
+ * @package common\misc
+ */
 class LError
 {
-
     const SUCCESS = 200;
     const INTERNAL_ERROR = 500;
 
-    public static $errMsg = array(
+    public static $errMsg = [
         self::SUCCESS => '成功',
-    );
+    ];
 
-
-    public static function getErrMsg($message, array $params = array())
-    {
-        $patterns = array_map(function($pattern) {
-            return "/#$pattern#/";
-        }, array_keys($params));
-        $values = array_values($params);
-        return preg_replace($patterns, $values, $message);
-    }
-
-    public static function getErrMsgByCode($code, array $params = array())
+    /**
+     * 根据code获取msg描述
+     * @param $code
+     * @param array $params
+     * @return mixed
+     */
+    public static function getErrMsgByCode($code, array $params = [])
     {
         $errMsg = static::errorMsg();
         $message = isset($errMsg[$code]) ? $errMsg[$code] : '服务器忙，请稍后再试～';
+
         return self::getErrMsg($message, $params);
     }
 
+    /**
+     * @return array
+     */
     public static function errorMsg()
     {
         return self::$errMsg;
+    }
+
+    /**
+     * @param $message
+     * @param array $params
+     * @return mixed
+     */
+    public static function getErrMsg($message, array $params = [])
+    {
+        $patterns = array_map(
+            function ($pattern) {
+                return "/#$pattern#/";
+            },
+            array_keys($params)
+        );
+
+        $values = array_values($params);
+
+        return preg_replace($patterns, $values, $message);
     }
 
     /**
@@ -48,16 +66,19 @@ class LError
     {
         $args = func_get_args();
         $res = array_shift($args);
-        while (!empty($args)) {
+        while (!empty($args))
+        {
             $next = array_shift($args);
-            foreach ($next as $k => $v) {
-                if (is_array($v) && isset($res[$k]) && is_array($res[$k]))
+            foreach ($next as $k => $v)
+            {
+                if (is_array($v) && isset($res[$k]) && is_array($res[$k])) {
                     $res[$k] = self::mergeErrorMsg($res[$k], $v);
-                else
+                } else {
                     $res[$k] = $v;
+                }
             }
         }
+
         return $res;
     }
-
 }

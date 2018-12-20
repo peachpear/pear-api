@@ -1,26 +1,26 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iBaiYang
- * Date: 2018/3/28
- * Time: 下午5:05
- */
 namespace common\components;
 
 use common\misc\LError;
 use yii\base\Exception;
 
+/**
+ * Class LException
+ * @package common\components
+ */
 class LException extends Exception
 {
-    const E_HHVM_FATAL_ERROR = 16777217;
+    const E_HHVM_FATAL_ERROR = 16777217;  // HHVM 引擎中的致命错误
 
     public function __construct($code = 0)
     {
         $message = LError::getErrMsgByCode($code);
+
         parent::__construct($message, $code, null);
     }
 
     /**
+     * 检查是否致命错误
      * Returns if error is one of fatal type.
      *
      * @param array $error error got from error_get_last()

@@ -1,31 +1,31 @@
 <?php
 return array(
-	'name' => 'APP',
-	'id'   =>   "php-demo",
+	'name' => "APP",
+	'id'   => "php-demo",
 	'basePath' => dirname(__DIR__),
-	'defaultRoute' => 'class/index',
-    'controllerNamespace'   =>  "backend\controllers",
+	'defaultRoute' => 'site/index',
+    'controllerNamespace' => "backend\controllers",
     'aliases' => [
         '@backend' => realpath(__DIR__."/../"),
     ],
     "components" => [
         // 内部组件
-        'request' => array(
+        'request' => [
             'class' => 'common\components\LHttpRequest',
             'enableCookieValidation' => true,
             'enableCsrfValidation' => false,
-            'parsers'    =>  [
+            'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ],
-        ),
-        'response'  =>  array(
+        ],
+        'response' => [
             'format'=> "json",
-        ),
-        'errorHandler'  =>  array(
+        ],
+        'errorHandler' => [
             'class' => 'common\components\LErrorHandler',
-        ),
-        'urlManager'   =>  array(
-            'enablePrettyUrl'   =>  true,
-        ),
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+        ],
     ]
 );

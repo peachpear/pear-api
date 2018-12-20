@@ -1,20 +1,18 @@
 <?php
-
 namespace common\service;
 
 use Yii;
 
 /**
- * Created by PhpStorm.
- * User: iBaiYang
- * Date: 2018/3/31
- * Time: 上午10:29
+ * 请求记录日志黑名单服务类
+ * Class LLogRequestBlackListService
+ * @package common\service
  */
 class LLogRequestBlackListService
 {
-
     /**
-     *是否在请求记录的黑名单中
+     * 该url是否在请求记录的黑名单中
+     * e.g. site/index
      * @param $url
      * @return bool
      */
@@ -22,8 +20,10 @@ class LLogRequestBlackListService
     {
         if (isset(Yii::$app->params['logBlackList'])) {
             $blackList = Yii::$app->params['logBlackList'];
+
             return in_array($url, $blackList) ? true : false;
         }
+
         return false;
     }
 }
