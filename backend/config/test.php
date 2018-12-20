@@ -14,7 +14,7 @@ $initConfig = [
         ],
     ],
     "params"    =>  [
-        'elkIndexName'  =>  [
+        'elkIndexName' =>  [
             "error" =>  "error_demo_logs_test",
             "warning" =>  "demo_logs_test",
             "info" =>  "demo_logs_test",
