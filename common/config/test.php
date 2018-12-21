@@ -32,7 +32,7 @@ $commonConfig = array(
         ],
     ],
     'params' => [],
-    "configCenter" => [
+    "configService" => [
         "filePath" => "/config/test/",
         "fileExt" => "json",
     ]
