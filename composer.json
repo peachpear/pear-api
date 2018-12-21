@@ -1,9 +1,9 @@
 {
     "name": "peachpear/pear-api",
     "description": "pear for api framework",
-    "keywords": ["pear", "api"],
+    "keywords": ["pear", "api", "peachpear"],
     "type": "project",
-    "license": "MIT",
+    "license": "MPL-2.0",
     "authors": [
         {
             "name": "baiyang",

@@ -31,3 +31,14 @@ phpunit.phar
 
 # composer.lock
 composer.lock
+
+# config
+backend/config/main.php
+console/config/main.php
+
+# runtime
+backend/runtime/*
+console/runtime/*
+
+# .htaccess
+public/.htaccess
