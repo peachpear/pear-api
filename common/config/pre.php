@@ -10,8 +10,6 @@ $commonConfig = array(
             'keyPrefix' => '',
         ],
         'demoDB'  => [
-            'class' => '\yii\db\Connection',
-            'charset' => 'utf8mb4',
             'dsn' => '',
             'username' => '',
             'password' => '',

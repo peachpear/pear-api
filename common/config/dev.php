@@ -10,8 +10,6 @@ $commonConfig = array(
             'keyPrefix' => 'demoDev.',
 		],
         'demoDB'  => [
-            'class' => '\yii\db\Connection',
-            'charset' => 'utf8mb4',
             'dsn' => 'mysql:host=192.168.100.2;port=3306;dbname=demo',
             'username' => 'demo',
             'password' => 'demo_+-*123',
