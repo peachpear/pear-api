@@ -1,5 +1,6 @@
 <?php
 defined("APP_NAME") || define("APP_NAME", "demo");
+defined('VERSION') or define('VERSION', '*');
 
 return array(
     'aliases' => [
