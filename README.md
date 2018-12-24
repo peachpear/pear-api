@@ -1,6 +1,12 @@
 # pear-api
 pear让你更畅快地编程。pear-api是以yii2为基础，去除次要服务，重构为只支持api访问服务的框架。
 
+### 前提准备
+
+必要服务支持：Mysql、Nginx、php-fpm、Redis、Kafka、RabbitMQ
+
+可选服务支持：Elasticsearch、Kibana、Jenkins
+
 ### 使用说明
 
 ```
