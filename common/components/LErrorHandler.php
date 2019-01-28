@@ -15,15 +15,6 @@ use yii\web\HttpException;
 class LErrorHandler extends ErrorHandler
 {
     /**
-     * 渲染异常
-     * @param \Error|\Exception $exception
-     */
-    public function renderException($exception)
-    {
-        $this->handleException($exception);
-    }
-
-    /**
      * 异常处理
      * $data['code'] ? $data['code'] : 500
      * @param $exception
@@ -90,47 +81,6 @@ class LErrorHandler extends ErrorHandler
 	}
 
     /**
-     * 格式化异常
-     * @param $exception
-     * @return array
-     */
-	protected function formatException($exception)
-	{
-        $fileName = $exception->getFile();
-        $errorLine = $exception->getLine();
-
-		$trace = $exception->getTrace();
-
-		foreach ($trace as $i => $t)
-		{
-			if (!isset($t['file'])) {
-				$trace[$i]['file'] = 'unknown';
-			}
-
-			if (!isset($t['line'])) {
-				$trace[$i]['line'] = 0;
-			}
-
-			if (!isset($t['function'])) {
-				$trace[$i]['function'] = 'unknown';
-			}
-
-			unset($trace[$i]['object']);
-		}
-
-		return array(
-			'code' => ($exception instanceof HttpException) ? $exception->statusCode : 500,
-			'type' => get_class($exception),
-			'errorCode' => $exception->getCode(),
-			'message' => $exception->getMessage(),
-			'file' => $fileName,
-			'line' => $errorLine,
-			'trace' => $exception->getTraceAsString(),
-//			'traces' => $trace,
-		);
-	}
-
-    /**
      * 致命错误处理
      */
 	public function handleFatalError()
@@ -149,5 +99,57 @@ class LErrorHandler extends ErrorHandler
 
             $this->handleException($exception);
         }
+    }
+
+    /**
+     * 格式化异常
+     * @param $exception
+     * @return array
+     */
+    protected function formatException($exception)
+    {
+        $fileName = $exception->getFile();
+        $errorLine = $exception->getLine();
+
+        $trace = $exception->getTrace();
+
+        foreach ($trace as $i => $t)
+        {
+            if (!isset($t['file'])) {
+                $trace[$i]['file'] = 'unknown';
+            }
+
+            if (!isset($t['line'])) {
+                $trace[$i]['line'] = 0;
+            }
+
+            if (!isset($t['function'])) {
+                $trace[$i]['function'] = 'unknown';
+            }
+
+            unset($trace[$i]['object']);
+        }
+
+        return array(
+            'code' => ($exception instanceof HttpException) ? $exception->statusCode : 500,
+            'type' => get_class($exception),
+            'errorCode' => $exception->getCode(),
+            'message' => $exception->getMessage(),
+            'file' => $fileName,
+            'line' => $errorLine,
+            'trace' => $exception->getTraceAsString(),
+//			'traces' => $trace,
+        );
+    }
+
+    /**
+     * 渲染异常输出
+     * 追踪父类可知，这里并不会用到
+     * @param \Error|\Exception $exception
+     */
+    public function renderException($exception)
+    {
+        // 本类上面异常处理、程序退出处理其中一个方法删了，这里可用到
+        $this->handleException($exception);
     }
 }
