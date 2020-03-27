@@ -124,8 +124,7 @@ class LRedisCache extends Cache
 	 */
 	protected function getValue($key)
 	{
-		if ($this->_ping)
-		{
+		if ($this->_ping) {
 			$this->checkConnection();
 		}
 		return $this->_cache->get($key);

@@ -17,6 +17,6 @@ class LMapiError extends LError
      */
 	public static function errorMsg()
 	{
-		return parent::mergeErrorMsg( self::$errMsg, self::$_msg );
+		return parent::mergeErrorMsg(self::$errMsg, self::$_msg);
 	}
 }

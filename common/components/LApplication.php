@@ -7,6 +7,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Application;
 
 /**
+ * Web应用
  * Class LApplication
  * @package common\components
  */
@@ -22,7 +23,7 @@ class LApplication extends Application
     {
         $this->initAliases($config);
 
-        // 加载配置中心文件，替换config
+        // 加载配置中心文件，完善config
         if (!empty($config["configService"])) {
             $filePath = $config["configService"]["filePath"];
             $fileExtension = $config["configService"]["fileExt"];
@@ -36,6 +37,7 @@ class LApplication extends Application
     }
 
     /**
+     * 初始化配置别名
      * @param $config
      */
     public function initAliases(&$config)
@@ -52,6 +54,7 @@ class LApplication extends Application
     /**
      * 重新定义核心类
      * 摒弃无用核心类
+     * 覆盖父类定义 yii\web\Application->coreComponents()
      * @return array
      */
     public function coreComponents()
